@@ -14,5 +14,5 @@ Calculer l'Itinéraire le Plus Court : Calcule l'itinéraire le plus court entre
 Afficher l'itinéraire sur une carte folium : Affiche l'itinéraire calculé sur une carte Folium.
 
 ## Auteurs
-Dinan BRISSON
-Rakan ABOUDAGGA 
+- Dinan BRISSON
+- Rakan ABOUDAGGA 
