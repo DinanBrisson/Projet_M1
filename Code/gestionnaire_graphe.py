@@ -1,16 +1,13 @@
 import networkx as nx
 import momepy
 import folium
-import requests
 from geopy.distance import geodesic
-from geopy.geocoders import Nominatim
 
 
 class GestionnaireGraphe:
     def __init__(self):
         self.graph = None  # Initialisation du graphe à None car pas encore créée
         self.shortest_path = None  # Initialisation de shortest_path à None car pas encore créée
-        self.geolocator = Nominatim(user_agent="itineraire")  # Initialisation d'un géolocaliseur utilisant l'API Nominatim pour obtenir les coordonnées
 
     def creer_graphe(self, gdf):
         """
@@ -37,7 +34,7 @@ class GestionnaireGraphe:
 
         # Calculer les poids des arêtes en fonction de la vitesse maximale des routes
         for u, v, data in self.graph.edges(data=True):
-            maxspeed = data.get('max_speed', 30)  # Récupérer la vitesse maximale de l'arête, par défaut 30
+            maxspeed = data.get('max_speed', 5)  # Récupérer la vitesse maximale de l'arête, par défaut 30
             # Poids inversement proportionnel à la vitesse maximale pour privilégier les axes rapides
             data['weight'] = 1 / maxspeed
 
@@ -49,20 +46,17 @@ class GestionnaireGraphe:
         Trouve le noeud le plus proche d'un point donné.
 
         Args:
-            coordonnees (tuple): Coordonnées du point sous forme de tuple (latitude, longitude).
+            coordonnees (tuple): Coordonnées du point sous forme de tuple (longitude, latitude).
 
         Returns:
             tuple: Coordonnées du noeud le plus proche.
         """
         if self.graph is not None:
             closest_node = None
-            min_distance = float('inf')  # Initialiser la distance minimale à l'infini
-
-            # Convertir les coordonnées en nombres à virgule flottante
-            coordonnees = (float(coordonnees[1]), float(coordonnees[0]))
+            min_distance = float('inf')
 
             for node in self.graph.nodes():
-                # Calculer la distance géodésique entre les coordonnées de la ville saisie et chaque noeud
+                # Calculer la distance géodésique entre les coordonnées de la ville et chaque nœud
                 distance = geodesic(coordonnees, node).meters
                 if distance < min_distance:
                     min_distance = distance
@@ -111,29 +105,3 @@ class GestionnaireGraphe:
                 folium.PolyLine(locations=[(self.shortest_path[i][1], self.shortest_path[i][0]), (self.shortest_path[i+1][1], self.shortest_path[i+1][0])], color='blue').add_to(m)
 
             m.show_in_browser()
-
-    @staticmethod
-    def obtenir_coordonnees_ville(ville):
-        """
-        Obtenir les coordonnées (latitude, longitude) d'une ville à partir de son nom.
-
-        Args:
-            ville (str): Nom de la ville.
-
-        Returns:
-            tuple: Coordonnées (latitude, longitude) de la ville.
-        """
-        url = f"https://nominatim.openstreetmap.org/search?q={ville}&format=json&limit=1"  # Construit l'URL pour interroger l'API Nominatim avec la ville donnée et récupérer les données au format JSON
-
-        response = requests.get(url)  # Envoie d'une requête HTTP GET à l'URL construite
-
-        data = response.json()  # Convertit la réponse JSON en un dictionnaire Python
-
-        if data:
-            latitude = data[0]['lat']
-            longitude = data[0]['lon']
-            return latitude, longitude  # Retourne les coordonnées de la ville.
-        else:
-            print("Coordonnées introuvables pour la ville de",
-                  ville)
-            return None
