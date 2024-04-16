@@ -1,5 +1,5 @@
-from Code.gestionnaire_shapefile import GestionnaireShapefile
-from Code.gestionnaire_graphe import GestionnaireGraphe
+from gestionnaire_shapefile import GestionnaireShapefile
+from gestionnaire_graphe import GestionnaireGraphe
 
 if __name__ == "__main__":
     # Initialisation du gestionnaire de fichiers Shapefile
