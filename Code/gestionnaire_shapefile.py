@@ -52,8 +52,27 @@ class GestionnaireShapefile:
         # Couleurs pour distinguer chaque calque
         couleurs = ['red', 'blue', 'green', 'orange', 'purple', 'yellow', 'cyan', 'magenta', 'lime', 'pink']
 
-        # Itération sur chaque calque chargé
-        for index, (nom_calque, gdf) in enumerate(self.calques.items()):
+        # Liste des calques disponibles
+        calques_disponibles = self.calques
+
+        # Demander à l'utilisateur quels calques afficher
+        print("Calques disponibles :")
+        for index, nom_calque in enumerate(calques_disponibles.keys()):
+            print(f"{index + 1}. {nom_calque}")
+
+        while True:
+            choix_calques = input("Entrez les noms des calques séparés par des virgules : ")
+            choix = choix_calques.split(',')
+
+            calques_valides = [nom for nom in choix if nom in calques_disponibles]
+            if len(calques_valides) == len(choix):
+                break
+            else:
+                print("Certains calques saisis ne sont pas valides. Veuillez réessayer.")
+
+        # Afficher les calques sélectionnés
+        for index, nom_calque in enumerate(calques_valides):
+            gdf = calques_disponibles[nom_calque]
             if gdf is None:
                 print(f"Le calque '{nom_calque}' n'a pas été trouvé.")
                 continue

@@ -14,6 +14,9 @@ if __name__ == "__main__":
     voies_ferrees_gdf = gestionnaire_shapefile.calques['railways']
     points_gdf = gestionnaire_shapefile.calques['points']
 
+    # Afficher les calques sur une carte Folium
+    gestionnaire_shapefile.afficher_calques_folium()
+
     # Demander à l'utilisateur s'il souhaite partir ou arriver à un point d'intérêt ou une ville
     while True:
         choix_point_depart = input("Si vous voulez partir d'un point d'intérêt, tapez 1, si vous voulez partir d'une ville, tapez 2: ")
