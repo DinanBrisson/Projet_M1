@@ -9,7 +9,7 @@ class GestionnaireGraphe:
         self.graph = None  # Initialisation du graphe à None car pas encore créée
         self.shortest_path = None  # Initialisation de shortest_path à None car pas encore créée
 
-    def creer_graphe(self, gdf):
+    def creer_graphe_route(self, gdf):
         """
         Crée un graphe à partir d'un GeoDataFrame.
 
@@ -41,6 +41,32 @@ class GestionnaireGraphe:
                                 15)  # Récupérer la vitesse maximale de l'arête, par défaut 50 si non spécifiée
             # Poids inversement proportionnel à la vitesse maximale pour privilégier les axes rapides
             data['weight'] = 1 / maxspeed
+
+        print("Noeuds : ", self.graph.nodes)
+
+    def creer_graphe_train(self, gdf):
+        """
+        Crée un graphe à partir d'un GeoDataFrame.
+
+        Args:
+            gdf (GeoDataFrame): GeoDataFrame contenant les données spatiales.
+        """
+
+        # Création du graphe grâce à momepy
+        self.graph = momepy.gdf_to_nx(gdf, approach='primal', directed=True, oneway_column="oneway")
+
+        # Supprimer les boucles du graphe
+        self.graph.remove_edges_from(nx.selfloop_edges(self.graph))
+
+        # Trouver les composantes fortement connectées du graphe
+        connected_components = list(nx.strongly_connected_components(self.graph))
+
+        # Trouver la plus grande composante fortement connectée
+        largest_component = max(connected_components, key=len)
+
+        # Supprimer les nœuds qui ne sont pas dans la plus grande composante connexe pour ne pas avoir de noeuds isolés
+        isolated_nodes = set(self.graph.nodes) - largest_component
+        self.graph.remove_nodes_from(isolated_nodes)
 
         print("Noeuds : ", self.graph.nodes)
 

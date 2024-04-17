@@ -121,9 +121,9 @@ if __name__ == "__main__":
 
     # Créer le graphe en fonction du mode de transport choisi
     if mode_transport == 'voiture':
-        gestionnaire_graphe.creer_graphe(routes_gdf)
+        gestionnaire_graphe.creer_graphe_route(routes_gdf)
     else:
-        gestionnaire_graphe.creer_graphe(voies_ferrees_gdf)
+        gestionnaire_graphe.creer_graphe_train(voies_ferrees_gdf)
 
     # Trouver le nœud le plus proche des coordonnées de départ et d'arrivée
     noeud_depart = gestionnaire_graphe.trouver_noeud_le_plus_proche(coord_depart)
