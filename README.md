@@ -27,6 +27,9 @@ Elle offre les fonctionnalités suivantes :
 - calculer_itineraire(source_node, target_node) : Calcule l'itinéraire le plus court entre deux nœuds dans le graphe, en utilisant l'algorithme de recherche du plus court chemin.
 afficher_carte_itineraire(source_node, target_node) : Affiche l'itinéraire le plus court sur une carte interactive Folium.
 
+## Code test
+Ce dossier contient des petits codes qui ont permi l'avancée du projet et sont ici à titre d'avancée du projet.
+
 ## Limitation
 Afin d'obtenir un itinéraire cohérent, il est préférable d'opter pour un itinéraire de distance faible pour la voiture.
 
