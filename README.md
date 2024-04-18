@@ -32,11 +32,17 @@ Afin d'obtenir un itinéraire cohérent, il est préférable d'opter pour un iti
 
 ## Lancement du Code dans PyCharm
 Ouvrez le projet dans PyCharm en sélectionnant "File" > "Open".
+
 Assurez-vous que votre environnement virtuel est configuré correctement dans PyCharm. Si ce n'est pas le cas, vous pouvez le configurer en allant dans "File" > "Settings" > "Project: <nom_du_projet>" > "Python Interpreter". Sélectionnez ou ajoutez l'environnement virtuel dans lequel vous avez installé les dépendances requises pour le projet.
+
 Une fois que votre environnement virtuel est configuré, naviguez jusqu'au fichier principal du projet, "main.py".
+
 Cliquez avec le bouton Run.
+
 Le code va s'exécuter dans la console de PyCharm.
+
 Une fois les calques affichés, retounez dans PyCharm et cliquez sur le bouton Stop pour éxectuer la suite du code.
+
 Le code va s'exécuter dans la console PyCharm.
 
 ## Auteurs
