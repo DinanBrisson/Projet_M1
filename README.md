@@ -46,5 +46,5 @@ Une fois les calques affichés, retounez dans PyCharm et cliquez sur le bouton S
 Le code va s'exécuter dans la console PyCharm.
 
 ## Auteurs
-- Dinan BRISSON
-- Rakan ABOUDAGGA 
+- ABOUDAGGA Rakan
+- BRISSON Dinan
