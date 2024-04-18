@@ -53,13 +53,13 @@ class GestionnaireGraphe:
         """
 
         # Création du graphe grâce à momepy
-        self.graph = momepy.gdf_to_nx(gdf, approach='primal', directed=True, oneway_column="oneway")
+        self.graph = momepy.gdf_to_nx(gdf, approach='primal')
 
         # Supprimer les boucles du graphe
         self.graph.remove_edges_from(nx.selfloop_edges(self.graph))
 
         # Trouver les composantes fortement connectées du graphe
-        connected_components = list(nx.strongly_connected_components(self.graph))
+        connected_components = list(nx.connected_components(self.graph))
 
         # Trouver la plus grande composante fortement connectée
         largest_component = max(connected_components, key=len)
