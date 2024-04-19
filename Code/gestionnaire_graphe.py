@@ -11,7 +11,7 @@ class GestionnaireGraphe:
 
     def creer_graphe_route(self, gdf):
         """
-        Crée un graphe à partir d'un GeoDataFrame.
+        Crée un graphe à partir d'un GeoDataFrame pour les routes.
 
         Args:
             gdf (GeoDataFrame): GeoDataFrame contenant les données spatiales.
@@ -38,7 +38,7 @@ class GestionnaireGraphe:
         # Calculer les poids des arêtes en fonction de la vitesse maximale
         for u, v, data in self.graph.edges(data=True):
             maxspeed = data.get('max_speed',
-                                15)  # Récupérer la vitesse maximale de l'arête, par défaut 50 si non spécifiée
+                                15)  # Récupérer la vitesse maximale de l'arête, par défaut 15 si non spécifiée
             # Poids inversement proportionnel à la vitesse maximale pour privilégier les axes rapides
             data['weight'] = 1 / maxspeed
 
@@ -46,7 +46,7 @@ class GestionnaireGraphe:
 
     def creer_graphe_train(self, gdf):
         """
-        Crée un graphe à partir d'un GeoDataFrame.
+        Crée un graphe à partir d'un GeoDataFrame pour les voies ferrées.
 
         Args:
             gdf (GeoDataFrame): GeoDataFrame contenant les données spatiales.
