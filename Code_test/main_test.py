@@ -8,6 +8,9 @@ if __name__ == "__main__":
     # Import des données depuis le dossier contenant les fichiers Shapefile des villes
     gestionnaire_shapefile.importer_dossier('../Donnees/departement-14')
 
+    # Afficher les calques choisis sur une carte Folium
+    gestionnaire_shapefile.afficher_calques_folium()
+
     # Création des différents géodataframe
     villes_gdf = gestionnaire_shapefile.calques['places']
     routes_gdf = gestionnaire_shapefile.calques['roads']
